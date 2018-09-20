@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
+</head>
+<body>
+	<div>
+		<form method="post">
+			{% csrf_token %}
+      <ul>
+			  {{ form.as_ul }}
+        <li>
+			    <button type="submit">Login</button>
+        </li>
+      </ul>
+		</form>
+	</div>
+</body>
+</html>
