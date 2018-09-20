@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="73d73742-b4c7-4f07-bab0-d460a43c1cf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/apps/analisis_clinicos/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/analisis_clinicos/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/analisis_clinicos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/analisis_clinicos/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/analisis/nuevo_resultado.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/analisis/nuevo_resultado.html" afterDir="false" />
-    </list>
+    <list default="true" id="73d73742-b4c7-4f07-bab0-d460a43c1cf6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -351,7 +347,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24986821" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
