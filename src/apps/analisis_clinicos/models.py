@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from decimal import Decimal
 
 
@@ -40,3 +42,11 @@ class Resultado(models.Model):
         elif tv == 'bool':
             return True if self.valor_numerico > 0 else False
 
+
+
+@receiver(pre_save, sender=Resultado)
+def my_handler(sender, instance, **kwargs):
+    a = instance.analisis
+    if instance.analisis:
+        instance.analisis_nombre = a.nombre
+        instance.tipo_resultado = a.tipo_resultado
