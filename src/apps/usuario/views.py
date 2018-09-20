@@ -16,6 +16,16 @@ class HomeView(APIView):
 
 	def get(self, request, format='json'):
 		p = 0
-		return render(request, 'index.html', dict(
+		return render(request, 'web/index.html', dict(
+			p=p
+		))
+
+
+@method_decorator(login_required, name='dispatch')
+class HomeView(APIView):
+
+	def get(self, request, format='json'):
+		p = 0
+		return render(request, 'web/index.html', dict(
 			p=p
 		))

@@ -13,7 +13,8 @@ class Analisis(models.Model):
             ('bool', "Post-Negt"),
         )
     )
-    unidad_medida = models.ForeignKey("sistema.UnidadMedida", null=False)
+    unidad_medida = models.ForeignKey(
+        "sistema.UnidadMedida", null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.nombre
@@ -22,8 +23,10 @@ class Analisis(models.Model):
 #194
 class Resultado(models.Model):
     paciente = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL)
-    analisis = models.ForeignKey(Analisis, null=False)
+        settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+    fecha = models.DateTimeField('Fecha de Resultado', null=True)
+    analisis = models.ForeignKey(
+        Analisis, null=True, on_delete=models.SET_NULL)
     analisis_nombre = models.CharField("Nombre", max_length=64, null=True)
     tipo_resultado = models.CharField("Tipo de resultado", max_length=30)
     valor_numerico = models.DecimalField(

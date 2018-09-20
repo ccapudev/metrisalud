@@ -1,0 +1,15 @@
+  {% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}Nueva medición{% endblock title %}
+    
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title">Listado de Análisis</h1>
+    {% for a in analisis %}
+      {% include 'analisis/analisis_item.html' %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock content %}

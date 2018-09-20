@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     'apps.sistema',
+    'apps.analisis_clinicos',
     'apps.usuario',
 ]
 

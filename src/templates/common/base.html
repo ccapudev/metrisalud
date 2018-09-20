@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MetriSalud | {% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+  {% block css_adicional %}{% endblock css_adicional %}
+</head>
+<body>
+  {% block root %}
+    {% include 'common/header.html' %}
+    <div class="container is-fluid">
+      {% block content %}
+      <div class="notification">
+        This container is <strong>centered</strong> on desktop.
+      </div>
+      {% endblock content %}
+    </div>
+    {% include 'common/footer.html' %}
+  {% endblock root %}
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script>
+    $('header a[href="'+window.location.pathname+'"]').parent().addClass('is-active');
+  </script>
+  {% block jsfinal %}{% endblock jsfinal %}
+</body>
+</html>

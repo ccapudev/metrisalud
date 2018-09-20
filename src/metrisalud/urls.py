@@ -18,10 +18,16 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('auth/', include(
         ('django.contrib.auth.urls', 'auth'),
         namespace='auth'
     )),
-    path('users/', include('apps.usuario.urls',
-                           namespace='usuario:users')),
+
+    path('users/', include('apps.usuario.urls', namespace='user')),
+    path('', include('apps.web.urls', namespace='web')),
+
+    path('analisis/', include(
+        'apps.analisis_clinicos.urls', namespace='analisis'
+    )),
 ]

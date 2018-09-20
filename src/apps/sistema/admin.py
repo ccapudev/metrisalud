@@ -1,3 +1,7 @@
 from django.contrib import admin
+from apps.sistema.models import UnidadMedida
 
-# Register your models here.
+
+@admin.register(UnidadMedida)
+class UnidadMedidaAdmin(admin.ModelAdmin):
+    pass

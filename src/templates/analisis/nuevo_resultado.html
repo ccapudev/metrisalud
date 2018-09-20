@@ -1,0 +1,17 @@
+  {% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}Nueva medición{% endblock title %}
+    
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title">Registrar resultado</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_ul }}
+      <input type="submit" value="enviar">
+    </form>
+  </div>
+</section>
+{% endblock content %}

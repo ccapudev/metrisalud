@@ -1,0 +1,22 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      {{ a.nombre }}
+    </p>
+    <a href="#" class="card-header-icon" aria-label="more options">
+      <span class="icon">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </a>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      este analisis se mide mediante {{ a.unidad_medida.simbolo }}
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="#" class="card-footer-item">+1 </a>
+    <a href="#" class="card-footer-item">Editar</a>
+    <a href="{% url 'analisis:nuevo_resultado' a.id %}" class="card-footer-item">+ Resultado</a>
+  </footer>
+</div>
