@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jkjj4d&7&-prkkj1%jhnskcylq5)5su=07y02s9y##v+mjli29'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
+    'apps.core',
     'apps.sistema',
     'apps.analisis_clinicos',
     'apps.usuario',
@@ -55,7 +56,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.core.middleware.json_request.JsonParseRequest',
+    'apps.core.middleware.errors.Exceptions',
 ]
+
 
 ROOT_URLCONF = 'metrisalud.urls'
 

@@ -3,10 +3,11 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from apps.core.models import AuditableModel
 from decimal import Decimal
 
 
-class Analisis(models.Model):
+class Analisis(AuditableModel):
     nombre = models.CharField("Nombre", max_length=64, null=True)
     tipo_resultado = models.CharField(
         "Tipo de resultado", max_length=30,
@@ -23,7 +24,7 @@ class Analisis(models.Model):
 
 
 #194
-class Resultado(models.Model):
+class Resultado(AuditableModel):
     paciente = models.ForeignKey(
         settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     fecha = models.DateTimeField('Fecha de Resultado', null=True)
@@ -42,7 +43,6 @@ class Resultado(models.Model):
         elif tv == 'bool':
             return True if self.valor_numerico > 0 else False
         return self.valor_numerico
-
 
 
 @receiver(pre_save, sender=Resultado)

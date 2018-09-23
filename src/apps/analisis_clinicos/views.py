@@ -35,23 +35,26 @@ class ResultadosView(View):
 
     def get(self, request):
         form = ResultadoForm()
-        resultados = Resultado.objects.filter(
+        resultados = Resultado.objects.activos().filter(
             paciente=request.user
         ).annotate(
             simbolo=F('analisis__unidad_medida__simbolo')
-        ).order_by('-id')
+        ).order_by('-id')[:50]
+        if request.is_ajax():
+            pass
+
         return render(request, 'analisis/lista_resultados.html', locals())
 
-    def post(self, request):
-        kw = request.GET.get('kw') or ''
-        analisis_list = Analisis.objects.filter(
-            nombre__icontains=kw
-        )[:10]
-        return JsonResponse(dict(
-            results=list(map(lambda a: dict(
-                dict(label=a.nombre, value=a.id, tr=a.tipo_resultado)
-            ), analisis_list))
-        ))
+    def delete(self, request):
+        if request.is_ajax():
+            resultado_id = request.AXIOS.get('resultado_id')
+            Resultado.objects.filter(id=resultado_id).update(
+                is_active=False
+            )
+            return JsonResponse({
+                'anulado': True
+            })
+        raise ValueError("Error eliminando resultado")
 
 @method_decorator(login_required, name='dispatch')
 class NewAnalisisView(View):

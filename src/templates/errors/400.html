@@ -1,0 +1,14 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block title %}Error 400{% endblock title %}
+
+{% block root %}
+<section class="section">
+    <div class="container">
+      <h1 class="title">Error 400</h1>
+      <p>
+          {{ exception }}
+      </p>
+    </div>
+  </section>
+{% endblock root %}
