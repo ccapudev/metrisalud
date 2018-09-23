@@ -5,13 +5,90 @@
     
 {% block content %}
 <section class="section">
-  <div class="container">
+  <div class="container" id="vContentForm">
     <h1 class="title">Registrar resultado</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_ul }}
-      <input type="submit" value="enviar">
+    <form :class="{'disabled': sending}">
+      <combo-usuario v-model="usuario_id"></combo-usuario>
+      <controlador label="Fecha de examen">
+        <el-date-picker
+          v-model="fecha"
+          type="datetime"
+          format="dd/MM/yyyy HH:mm"
+          value-format="dd/MM/yyyy HH:mm"
+          placeholder="Seleccione fecha">
+        </el-date-picker>
+      </controlador>
+      <combo-analisis v-model="analisis"></combo-analisis>
+      <controlador v-if="analisis_type == 'numb'" label="Resultado">
+        <el-input-number v-model="resultado" :min="1"></el-input-number>
+      </controlador>
+      <controlador v-else-if="analisis_type == 'bool'" label="Resultado">
+        <select-boolean v-model="resultado"></select-boolean>
+      </controlador>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link" @click.prevent="guardar">Guardar</button>
+        </div>
+        <div class="control">
+          <a href="{% url 'analisis:analisis_list' %}" class="button is-text">Cancelar</a>
+        </div>
+      </div>
     </form>
   </div>
 </section>
 {% endblock content %}
+
+{% block jsfinal %}
+<script type="text/javascript">
+new Vue({
+  el: '#vContentForm',
+  data: {
+    usuario_id: '',
+    analisis: '',
+    resultado: '',
+    fecha: null,
+    sending: false
+  },
+  methods: {
+    guardar(){
+      this.sending = true
+      _axios({
+        url: window.location.pathname,
+        data: this.formData,
+        method: 'post',
+      }).then(rsp => {
+        this.sending = false
+        alert("Guardado con éxito")
+        console.log(rsp.data)
+      }).catch(err => {
+        this.sending = false
+        if(err.response.data.msg){
+          alert(err.response.data.msg)
+        }
+      })
+    }
+  },
+  computed: {
+    analisis_id(){
+      return this.analisis ? this.analisis.value : null
+    },
+    analisis_type(){
+      return this.analisis ? this.analisis.tr : null
+    },
+    formData(){
+      let form = new FormData()
+      form.append('analisis', this.analisis_id)
+      form.append('paciente', this.usuario_id)
+      form.append('fecha', this.fecha)
+      form.append('analisis', this.analisis_id)
+      form.append('valor_numerico', this.resultado)
+      return form
+    }
+  },
+  mounted(){
+    // this.fecha = new Date()
+  }
+})
+</script>
+{% endblock jsfinal %}
+  

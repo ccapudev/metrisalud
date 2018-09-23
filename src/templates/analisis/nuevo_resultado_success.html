@@ -1,0 +1,28 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}Nueva medición{% endblock title %}
+    
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title">Resultado registrado exitosamente!</h1>
+    <a class="button is-primary" href="{% url 'analisis:nuevo_resultado' analisis_id %}">
+      <span class="icon">
+        <i class="fa fa-plus"></i>
+      </span>
+      <span>
+        Registrar nuevo resultado
+      </span>
+    </a>
+    <a class="button is-info" href="{% url 'analisis:analisis_list' %}">
+      <span class="icon">
+        <i class="fa fa-angle-left"></i>
+      </span>
+      <span>
+        Volver a lisado de analisis
+      </span>
+    </a>
+  </div>
+</section>
+{% endblock content %}

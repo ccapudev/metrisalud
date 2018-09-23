@@ -9,6 +9,16 @@ class User(AbstractUser):
     last_name_two = models.CharField(
         _('last name 2'), max_length=30, blank=True)
 
+    def get_full_name(self):
+        if self.first_name and self.last_name:
+            return "{} {} {}".format(
+                self.first_name,
+                self.last_name,
+                self.last_name_two or '',
+            )
+        else:
+            return self.username
+
 
 class Perfil(models.Model):
     tipo_sangre = models.CharField("Tipo de Sangre", max_length=3, null=True)

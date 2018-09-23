@@ -6,5 +6,6 @@ app_name = 'user'
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
+    path('finder/', views.UsersFinderView.as_view(), name='home'),
     path('jwt/', obtain_jwt_token, name='token')
 ]

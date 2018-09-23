@@ -6,6 +6,13 @@
   <title>MetriSalud | {% block title %}{% endblock title %}</title>
   <link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
   <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/theme-chalk.css' %}">
+  <style>
+    form.disabled{
+      opacity: 0.75;
+      pointer-events: none;
+    }
+  </style>
   {% block css_adicional %}{% endblock css_adicional %}
 </head>
 <body>
@@ -21,8 +28,24 @@
     {% include 'common/footer.html' %}
   {% endblock root %}
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/vue.js' %}"></script>
+  <script src="{% static 'js/axios@0.18.0.js' %}"></script>
+  <script src="{% static 'js/element-ui@2.4.7.js' %}"></script>
+  <script src="{% static 'js/element-ui@locale-es.js' %}"></script>
+  <script src="{% static 'system/components_bulma.js' %}"></script>
   <script>
+    ELEMENT.locale(ELEMENT.lang.es)
     $('header a[href="'+window.location.pathname+'"]').parent().addClass('is-active');
+    const csrfToken = "{{ csrf_token }}";
+    var _axios = axios.create({
+      // baseURL: 'https://some-domain.com/api/', 
+      timeout: 5000,
+      xsrfCookieName: 'csrftoken',
+      xsrfHeaderName: 'X-CSRFToken',
+      headers: {
+        'X-Requested-with': 'XMLHttpRequest'
+      }
+    });
   </script>
   {% block jsfinal %}{% endblock jsfinal %}
 </body>
