@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from django.db.models import F
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from apps.analisis_clinicos.forms import ResultadoForm
-from apps.analisis_clinicos.models import Analisis
+from apps.analisis_clinicos.models import Analisis, Resultado
 
 
 # Create your views here.
@@ -16,6 +17,30 @@ class AnalisisView(View):
         form = ResultadoForm()
         analisis = Analisis.objects.all()
         return render(request, 'analisis/lista_analisis.html', locals())
+
+    def post(self, request):
+        kw = request.GET.get('kw') or ''
+        analisis_list = Analisis.objects.filter(
+            nombre__icontains=kw
+        )[:10]
+        return JsonResponse(dict(
+            results=list(map(lambda a: dict(
+                dict(label=a.nombre, value=a.id, tr=a.tipo_resultado)
+            ), analisis_list))
+        ))
+
+# Create your views here.
+@method_decorator(login_required, name='dispatch')
+class ResultadosView(View):
+
+    def get(self, request):
+        form = ResultadoForm()
+        resultados = Resultado.objects.filter(
+            paciente=request.user
+        ).annotate(
+            simbolo=F('analisis__unidad_medida__simbolo')
+        ).order_by('-id')
+        return render(request, 'analisis/lista_resultados.html', locals())
 
     def post(self, request):
         kw = request.GET.get('kw') or ''

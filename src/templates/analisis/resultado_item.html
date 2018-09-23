@@ -1,0 +1,21 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      {{ r.analisis_nombre }}
+    </p>
+    <a href="#" class="card-header-icon" aria-label="more options">
+      <span class="icon">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </a>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      realizado {{ r.fecha }} 
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a class="card-footer-item">Unidad: {{ r.simbolo }}</a>
+    <a class="card-footer-item">{{ r.valor }}</a>
+  </footer>
+</div>

@@ -8,6 +8,8 @@ app_name = 'analisis_clinicos'
 urlpatterns = [
     path('', views.AnalisisView.as_view(),
          name='analisis_list'),
+    path('resultados/', views.ResultadosView.as_view(),
+         name='resultados_list'),
     path('nuevo/<int:analisis_id>/', views.NewAnalisisView.as_view(),
          name='nuevo_resultado'),
 ]

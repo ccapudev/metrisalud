@@ -41,6 +41,7 @@ class Resultado(models.Model):
             return self.valor_numerico
         elif tv == 'bool':
             return True if self.valor_numerico > 0 else False
+        return self.valor_numerico
 
 
 
