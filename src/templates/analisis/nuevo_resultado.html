@@ -58,12 +58,11 @@ new Vue({
         method: 'post',
       }).then(rsp => {
         this.sending = false
-        alert("Guardado con éxito")
-        console.log(rsp.data)
+        this.$swal("¡Listo!","Guardado con éxito", 'success')
       }).catch(err => {
         this.sending = false
         if(err.response.data.msg){
-          alert(err.response.data.msg)
+          this.$swal("¡Error!",err.response.data.msg, 'error')
         }
       })
     }

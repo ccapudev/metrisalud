@@ -30,6 +30,7 @@
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'js/vue.js' %}"></script>
   <script src="{% static 'js/axios@0.18.0.js' %}"></script>
+  <script src="{% static 'js/sweetalert@2.1.0.js' %}"></script>
   <script src="{% static 'js/element-ui@2.4.7.js' %}"></script>
   <script src="{% static 'js/element-ui@locale-es.js' %}"></script>
   <script src="{% static 'system/components_bulma.js' %}"></script>
@@ -46,6 +47,8 @@
         'X-Requested-with': 'XMLHttpRequest'
       }
     });
+    Vue.prototype.$axios = _axios;
+    Vue.prototype.$swal = swal;
   </script>
   {% block jsfinal %}{% endblock jsfinal %}
 </body>

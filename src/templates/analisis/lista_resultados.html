@@ -7,9 +7,11 @@
 <section class="section">
   <div class="container">
     <h1 class="title">Listado de resultados</h1>
-    {% for r in resultados %}
-      {% include 'analisis/resultado_item.html' %}
-    {% endfor %}
+    <div class="columns">
+      {% for r in resultados %}
+        {% include 'analisis/resultado_item.html' %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock content %}

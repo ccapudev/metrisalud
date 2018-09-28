@@ -169,3 +169,44 @@ Vue.component("controlador", {
       </div>
     `
 })
+
+Vue.component("resultado-card", {
+  template: `
+  <div class="column is-one-third">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          {{ resultado.analisis_nombre }}
+        </p>
+        <a href="#" class="card-header-icon" aria-label="Eliminar">
+          <span class="icon">
+            <i class="fas fa-trash" aria-hidden="true"></i>
+          </span>
+        </a>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          realizado {{ resultado.fecha }} 
+        </div>
+      </div>
+      <footer class="card-footer">
+        <a class="card-footer-item">Unidad: {{ resultado.simbolo }}</a>
+        <a class="card-footer-item">{{ resultado.valor }}</a>
+      </footer>
+    </div>
+  </div>
+  `,
+  props: {
+    resultado: {
+      type: Object,
+      default(){
+        return {}
+      }
+    }
+  },
+  methods: {
+    change(value){
+      this.$emit('input', value)
+    }
+  }
+})
