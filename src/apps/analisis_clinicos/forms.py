@@ -6,4 +6,4 @@ class ResultadoForm(ModelForm):
 
     class Meta:
         model = Resultado
-        exclude = ['tipo_resultado', 'analisis_nombre']
+        exclude = ['tipo_resultado', 'analisis_nombre', 'is_active']

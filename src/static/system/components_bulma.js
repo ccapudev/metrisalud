@@ -186,12 +186,12 @@ Vue.component("resultado-card", {
       </header>
       <div class="card-content">
         <div class="content">
-          realizado {{ resultado.fecha }} 
+          realizado {{ fecha }} 
         </div>
       </div>
       <footer class="card-footer">
         <a class="card-footer-item">Unidad: {{ resultado.simbolo }}</a>
-        <a class="card-footer-item">{{ resultado.valor }}</a>
+        <a class="card-footer-item">{{ resultado.valor_numerico }}</a>
       </footer>
     </div>
   </div>
@@ -207,6 +207,14 @@ Vue.component("resultado-card", {
   methods: {
     change(value){
       this.$emit('input', value)
+    },
+  },
+  computed: {
+    fecha(){
+      if (this.resultado.fecha){
+        return moment(this.resultado.fecha).format('LLLL');
+      }
+      return 'sin fecha'
     }
   }
 })

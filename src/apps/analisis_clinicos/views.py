@@ -2,6 +2,7 @@
 from django.db.models import F
 from django.shortcuts import render
 from django.http import JsonResponse
+from apps.core.utils.json_response import JsonResponseMixin
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -41,7 +42,9 @@ class ResultadosView(View):
             simbolo=F('analisis__unidad_medida__simbolo')
         ).order_by('-id')[:50]
         if request.is_ajax():
-            pass
+            return JsonResponseMixin(dict(
+                result=list(resultados)
+            ))
 
         return render(request, 'analisis/lista_resultados.html', locals())
 

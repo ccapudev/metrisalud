@@ -5,13 +5,42 @@
     
 {% block content %}
 <section class="section">
-  <div class="container">
+  <div class="container" id="vContentMain">
     <h1 class="title">Listado de resultados</h1>
-    <div class="columns">
-      {% for r in resultados %}
-        {% include 'analisis/resultado_item.html' %}
-      {% endfor %}
+    <div class="columns" v-for="chunk, index in chunks" :key="index">
+      <resultado-card v-for="resultado in chunk" :key="resultado.id" :resultado="resultado"></resultado-card>
     </div>
   </div>
 </section>
 {% endblock content %}
+{% block jsfinal %}
+<script type="text/javascript">
+// (function(){
+let main = new Vue({
+  el: '#vContentMain',
+  data: {
+    resultados: []
+  },
+  methods: {
+    getResultados(){
+      this.$axios({
+        url: '/analisis/resultados/',
+        method: 'get',
+      }).then(rsp => {
+        this.resultados = rsp.data.result
+        console.log(rsp.data)
+      })
+    }
+  },
+  computed: {
+    chunks(){
+      return _.chunk(this.resultados, 3)
+    }
+  },
+  created(){
+    this.getResultados()
+  }
+})
+//})();
+</script>
+{% endblock jsfinal %}

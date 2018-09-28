@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MetriSalud | {% block title %}{% endblock title %}</title>
   <link rel="stylesheet" href="{% static 'bulma/css/bulma.min.css' %}">
   <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
@@ -29,12 +30,16 @@
   {% endblock root %}
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'js/vue.js' %}"></script>
+  <script src="{% static 'js/lodash@1.8.3.js' %}"></script>
+  <script src="{% static 'js/moment.min.js' %}"></script>
+  <script src="{% static 'js/moment-with-locales.min.js' %}"></script>
   <script src="{% static 'js/axios@0.18.0.js' %}"></script>
   <script src="{% static 'js/sweetalert@2.1.0.js' %}"></script>
   <script src="{% static 'js/element-ui@2.4.7.js' %}"></script>
   <script src="{% static 'js/element-ui@locale-es.js' %}"></script>
   <script src="{% static 'system/components_bulma.js' %}"></script>
   <script>
+    moment.locale('es');
     ELEMENT.locale(ELEMENT.lang.es)
     $('header a[href="'+window.location.pathname+'"]').parent().addClass('is-active');
     const csrfToken = "{{ csrf_token }}";
